@@ -1,6 +1,5 @@
 package com.ntscorp.rnote.mgr;
 
-import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
