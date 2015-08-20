@@ -31,7 +31,7 @@ public class UserController {
 	@Autowired
 	LoggedInUserManager userManager;
 	
-	@RequestMapping(value = "/login.nts")
+	@RequestMapping(value = "/login")
 	public String login(@RequestParam("userId") String userId, HttpServletRequest request, Model model) {
 		
 		HttpSession session = request.getSession();
@@ -46,7 +46,7 @@ public class UserController {
 		return "main";
 	}
 	
-	@RequestMapping(value = "/getUserList.nts")
+	@RequestMapping(value = "/getUserList")
 	public @ResponseBody Map<String, List<String>> getLoggedIndUserList() {
 		
 		Map<String, List<String>> map = new HashMap<String, List<String>>();

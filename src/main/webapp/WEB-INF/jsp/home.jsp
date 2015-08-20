@@ -14,7 +14,7 @@
 <br>
 <br>
 
-<form action="/login.nts">
+<form action="/login">
 	<label>아이디를 입력하세요</label>&nbsp;
 	<input type="text" name="userId">
 	<input type="submit" value="입장">

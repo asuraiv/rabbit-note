@@ -21,19 +21,19 @@ public class MessageController {
 	@Autowired
 	MessageBO messageBO;
 	
-	@RequestMapping(value = "/sendMessage.nts")
+	@RequestMapping(value = "/sendMessage")
 	public @ResponseBody String sendMessage(@RequestParam("sender") String sender, 
 							@RequestParam("recipient") String recipient, 
 							@RequestParam("message") String message) {
 		return messageBO.sendMessage(sender, recipient, message);
 	}
 	
-	@RequestMapping(value = "/getMessage.nts")
+	@RequestMapping(value = "/getMessage")
 	public @ResponseBody MessageModel getMessage(@RequestParam("userId") String userId) {
 		return messageBO.getMessage(userId);
 	}
 	
-	@RequestMapping(value = "/openSendPopup.nts")
+	@RequestMapping(value = "/openSendPopup")
 	public String openSendPopup(@RequestParam("sender") String sender, 
 								@RequestParam("recipient") String recipient, Model model) {
 		
@@ -43,7 +43,7 @@ public class MessageController {
 		return "sendMessagePopup";
 	}
 	
-	@RequestMapping(value = "/openIncommingPopup.nts")
+	@RequestMapping(value = "/openIncommingPopup")
 	public String openIncommingPopup(@RequestParam("sender") String sender,
 								     @RequestParam("message") String message, Model model) {
 		

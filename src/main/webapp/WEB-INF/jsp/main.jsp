@@ -13,7 +13,7 @@
 function pollUserList() {
 	$.ajax({
 		type : 'get',
-		url : '/getUserList.nts',
+		url : '/getUserList',
 		dataType : 'json',
 		success : function(data) {			
 			var userList = data.userList;			
@@ -32,14 +32,14 @@ function pollUserList() {
 function pollGetMessage() {
 	$.ajax({
 		type : 'get',
-		url : "/getMessage.nts?userId=${sessionScope.userId }",
+		url : "/getMessage?userId=${sessionScope.userId }",
 		dataType : 'json',
 		success : function(data) {
 			console.debug(data);
 			if(data == null) {
 				return false;	
 			}
-			window.open("/openIncommingPopup.nts?sender=" + data.sender + "&message=" + data.message, "_blank",
+			window.open("/openIncommingPopup?sender=" + data.sender + "&message=" + data.message, "_blank",
 			"width=400, height=200, toolbar=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no");			
 		}
 	});
@@ -47,7 +47,7 @@ function pollGetMessage() {
 
 function openPopup() {
 	var recipient = $(this).text();	
-	window.open("/openSendPopup.nts?sender=${sessionScope.userId }&recipient=" + recipient, "_blank",
+	window.open("/openSendPopup?sender=${sessionScope.userId }&recipient=" + recipient, "_blank",
 			"width=400, height=200, toolbar=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no");
 }
 

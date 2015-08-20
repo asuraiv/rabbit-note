@@ -14,7 +14,7 @@ $(document).ready(function() {
 function send() {
 	$.ajax({
 		type : "get",
-		url : "/sendMessage.nts",
+		url : "/sendMessage",
 		data :$("#sendForm").serialize(),
 		dataType : "json",
 		success : function() {
@@ -26,7 +26,7 @@ function send() {
 </script>
 </head>
 <body>
-<form action="/sendMessage.nts" id="sendForm">
+<form action="/sendMessage" id="sendForm">
 	<input type="hidden" value="${sender}" name="sender">
 	<input type="hidden" value="${recipient}" name="recipient">
 	<textarea name="message" style="width: 375px; height: 150px;"></textarea>	
