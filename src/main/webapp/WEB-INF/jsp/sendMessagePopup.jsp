@@ -7,6 +7,7 @@
 <title>${recipient}님께 쪽지 보내기</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}resources/javascript/lib/jquery/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
+
 $(document).ready(function() {
 	$("#send").bind("click", send);
 });
@@ -21,13 +22,19 @@ function send() {
 			alert("쪽지를 보냈습니다");
 			window.close();
 		}
-	});	
+	});
+	
+	notifyToRecipient();
+}
+
+function notifyToRecipient() {
+	window.opener.messageListener.send($('input[name=recipient]').val());
 }
 </script>
 </head>
 <body>
 <form action="/sendMessage" id="sendForm">
-	<input type="hidden" value="${sender}" name="sender">
+	<input type="hidden" value="${sender}" name="sender" >
 	<input type="hidden" value="${recipient}" name="recipient">
 	<textarea name="message" style="width: 375px; height: 150px;"></textarea>	
 </form>

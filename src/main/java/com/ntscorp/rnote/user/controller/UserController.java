@@ -1,8 +1,8 @@
 package com.ntscorp.rnote.user.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -40,19 +40,16 @@ public class UserController {
 		// 사용자 메시지함 생성
 		queueManager.createUserMessgeQueue(userId);
 		
-		// 로그인한 사용자 목록에 추가
-		userManager.addUser(userId);
-		
 		return "main";
 	}
 	
 	@RequestMapping(value = "/getUserList")
-	public @ResponseBody Map<String, List<String>> getLoggedIndUserList() {
+	public @ResponseBody Map<String, Set<String>> getLoggedIndUserList() {
 		
-		Map<String, List<String>> map = new HashMap<String, List<String>>();
-		
+		Map<String, Set<String>> map = new HashMap<String, Set<String>>();
+				
 		synchronized (userManager) {
-			map.put("userList", userManager.getLoggedInUserList());
+			map.put("userList", LoggedInUserManager.getLoggedInUserMap().keySet());
 		}
 		
 		return map;

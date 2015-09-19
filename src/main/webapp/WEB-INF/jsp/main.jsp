@@ -10,30 +10,14 @@
 <script type="text/javascript" src="resources/javascript/lib/jquery/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
 
-var webSocket = new WebSocket('ws://localhost:8080/websocket');
+var messageListener = new WebSocket('ws://localhost:8080/message?userId=${sessionScope.userId }');
 
-webSocket.onerror = function(event) {
-	onError(event);
-};
-
-webSocket.onopen = function(event) {
-	onOpen(event);
-};
-
-webSocket.onmessage = function(event) {
-	onMessage(event);
-};
-
-function onMessage(event) {
-	console.log(event.data);
+messageListener.onmessage = function(event) {
+	getMessage(event);
 }
 
-function onOpen(event) {
-	console.log('Connection established');
-}
-
-function onError(event) {
-	console.log(event.data);
+function getMessage(event) {
+	pollGetMessage();
 }
 
 // queue 서버로부터 User List (메시지 수신함 리스트)를 가져온다
@@ -79,9 +63,13 @@ function openPopup() {
 }
 
 $(document).ready(function() {
+	
+	// 최초 접근시 메시지 가져옴..
+	pollGetMessage();
+	
 	// 1초마다 발동
 	setInterval(pollUserList, 1000);
-	setInterval(pollGetMessage, 1000);
+	//setInterval(pollGetMessage, 1000);
 	
 	$("#sendButton").bind("click", sendMessage);
 });
@@ -106,10 +94,6 @@ li:hover {
 <body>
 ${sessionScope.userId } 님 안녕하세요.
 <br>
-<br>
-<input id="sendButton" type="button" value="send message"/>
-<input id="msg" type="text"/>
-
 <!-- 로그인한 사용자 리스트 -->
 <h4>사용자 목록</h4>
 <div>

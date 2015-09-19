@@ -13,9 +13,8 @@ $(document).ready(function() {
 
 function reply() {
 	var recipient = "${sender}";
-	window.open("/openSendPopup?sender=${sessionScope.userId }&recipient=" + recipient, "_blank",
-			"width=400, height=200, toolbar=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no");	
-	window.close();
+	// 메시지 보내기창으로 이동
+	location.href = "/openSendPopup?sender=${sessionScope.userId }&recipient=" + recipient;
 }
 </script>
 </head>

@@ -1,6 +1,9 @@
 package com.ntscorp.rnote.utils;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.websocket.Session;
 
 import org.springframework.stereotype.Component;
 
@@ -13,20 +16,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggedInUserManager {
 	
-	private static List<String> loggedInUserList = new ArrayList<String>();
+	private static Map<String, Session> loggedInUserMap = new HashMap<String, Session>();
 	
-	public void addUser(String userId) {
-		if(loggedInUserList.contains(userId)) {
+	public static void addUser(String userId, Session session) {
+		if(loggedInUserMap.keySet().contains(userId)) {
 			return ;
 		}
-		loggedInUserList.add(userId);
+		loggedInUserMap.put(userId, session);
 	}
 	
-	public void removeUser(String userId) {
-		loggedInUserList.remove(userId);
+	public static void removeUser(String userId) {
+		loggedInUserMap.remove(userId);
 	}	
 	
-	public List<String> getLoggedInUserList() {
-		return loggedInUserList;
+	public static Map<String, Session> getLoggedInUserMap() {
+		return loggedInUserMap;
 	}
 }
