@@ -13,7 +13,7 @@ import javax.websocket.server.ServerEndpoint;
  * @author Jupyo Hong
  *
  */
-@ServerEndpoint("/")
+@ServerEndpoint("/websocket")
 public class WebSocketEndPoint {
 	
 	@OnMessage
@@ -22,19 +22,8 @@ public class WebSocketEndPoint {
 		// Print the client message for testing purposes
 		System.out.println("Received: " + message);
 
-		// Send the first message to the client
-		session.getBasicRemote().sendText("This is the first server message");
-
-		// Send 3 messages to the client every 5 seconds
-		int sentMessages = 0;
-		while (sentMessages < 3) {
-			Thread.sleep(5000);
-			session.getBasicRemote().sendText("This is an intermediate server message. Count: " + sentMessages);
-			sentMessages++;
-		}
-
 		// Send a final message to the client
-		session.getBasicRemote().sendText("This is the last server message");
+		session.getBasicRemote().sendText("This is the message from server!");
 	}
 
 	@OnOpen
