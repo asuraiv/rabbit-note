@@ -1,7 +1,6 @@
 package com.ntscorp.rnote.websocket;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -20,34 +19,25 @@ import com.ntscorp.rnote.utils.LoggedInUserManager;
 public class MessageServerEndPoint {
 	
 	@OnMessage
-	public void onMessage(String recipientUserId, Session session) throws IOException, InterruptedException {
+	public void onMessage(String recipientId, Session session) throws IOException, InterruptedException {
 
-		System.out.println("¹Ş´Â »ç¶÷: " + recipientUserId);
+		System.out.println("ë°›ëŠ” ì‚¬ëŒ: " + recipientId);
 		
-		Map<String, Session> loggedInUserMap = LoggedInUserManager.getLoggedInUserMap();
+		Session recipientSession = LoggedInUserManager.getLoggedInUserMap().get(recipientId);
 		
-		for(String userId : loggedInUserMap.keySet()) {
-			
-			if(userId.equals(recipientUserId)) {
-				
-				Session recipientUserSession = loggedInUserMap.get(userId);
-				
-				// ¼ö½ÅÀÚ sessionÀÇ Å¬¶óÀÌ¾ğÆ®¿¡ ¸Ş½ÃÁö µµÂø ¾Ë¸²À» pushÇÑ´Ù.
-				recipientUserSession.getBasicRemote().sendText("message arrived");
-			}
-		}		
+		recipientSession.getBasicRemote().sendText("message arrived");
 	}
 
 	@OnOpen
 	public void onOpen(Session session) {
-		// session°´Ã¼¿Í ÇÔ²² userId¸¦ ¸Ê¿¡ ÀúÀåÇÑ´Ù.
+		// sessionê°ì²´ì™€ í•¨ê»˜ userIdë¥¼ ë§µì— ì €ì¥í•œë‹¤
 		String userId = session.getRequestParameterMap().get("userId").get(0);
 		LoggedInUserManager.addUser(userId, session);
 	}
 
 	@OnClose
 	public void onClose(Session session) {
-		// Ä¿³Ø¼ÇÀÌ Á¾·áµÉ¶§ ÇØ´ç user¸¦ ¸Ê¿¡¼­ Á¦°ÅÇÑ´Ù
+		// ì»¤ë„¥ì…˜ì´ ì¢…ë£Œë ë•Œ í•´ë‹¹ userë¥¼ ë§µì—ì„œ ì œê±°í•œë‹¤
 		String userId = session.getRequestParameterMap().get("userId").get(0);
 		LoggedInUserManager.removeUser(userId);
 	}
