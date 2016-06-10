@@ -35,8 +35,7 @@ public class QueueManager {
 	}
 	
 	/**
-	 * userId를 사용해 큐(사용자 메시지함)를 생성한다
-	 * 
+	 *
 	 * @param userId
 	 * @return 
 	 */
@@ -51,9 +50,7 @@ public class QueueManager {
 		Map<String, Object> arguments = null;
 		
 		try {			
-			// 큐를 생성한다
 			DeclareOk declareOk = channel.queueDeclare(queueName, durable, autoDelete, exclusive, arguments);
-			// 큐를 exchange에 바인딩 한다.
 			queueBindToExchange(queueName);
 			
 			return declareOk;
@@ -64,9 +61,7 @@ public class QueueManager {
 	}
 	
 	/**
-	 * 생성된 큐를 exchange에 바인딩한다
-	 * 
-	 * @param channel
+	 *
 	 * @param queueName
 	 * @return 
 	 * @throws IOException

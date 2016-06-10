@@ -8,8 +8,7 @@ import javax.websocket.Session;
 import org.springframework.stereotype.Component;
 
 /**
- * 로그인한 유저들을 메모리에 저장
- * 
+ *
  * @author Jupyo Hong
  *
  */

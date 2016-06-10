@@ -37,7 +37,6 @@ public class UserController {
 		HttpSession session = request.getSession();
 		session.setAttribute("userId", userId);
 		
-		// 사용자 메시지함 생성
 		queueManager.createUserMessgeQueue(userId);
 		
 		return "main";

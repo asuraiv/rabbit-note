@@ -30,8 +30,7 @@ public class MessageBO {
 	QueueManager queueManager;
 	
 	/**
-	 * 수신자 큐에 메시지를 보낸다
-	 * 
+	 *
 	 * @param sender
 	 * @param recipient
 	 * @param message
@@ -62,8 +61,7 @@ public class MessageBO {
 	}
 	
 	/**
-	 * 자신의 큐에서 메시지를 가져온다.
-	 * 
+	 *
 	 * @param userId
 	 * @return
 	 */
